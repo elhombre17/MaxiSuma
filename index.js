@@ -30,6 +30,41 @@ $opciones.addEventListener('click', function(e){
         importe = null;
         $importe.value = "";
     }else{
-        alert("No ingresaste un monto")
+        appendAlert('Nice, you triggered this alert message!', 'success')
     }
 })
+const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+const appendAlert = (message, type) => {
+  const wrapper = document.createElement('div')
+  wrapper.innerHTML = [
+    `<div class="alert alert-${type} alert-dismissible mt-3" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    '</div>'
+  ].join('')
+
+  alertPlaceholder.append(wrapper)
+}
+
+let info={
+    "id": 0,
+    "nombre": "karin"
+}
+
+localStorage.setItem('data', JSON.stringify(info));
+
+// Leer el JSON existente del localStorage
+let data = localStorage.getItem('data');
+
+console.log(data);
+// Nueva información a agregar
+const nuevaInformacion = { "id": 1, "nombre": "Ejemplo" };
+
+// Agregar nueva información a la lista
+let infooo = {...data, ...nuevaInformacion}
+
+// Guardar el JSON actualizado en el localStorage
+localStorage.setItem('data', JSON.stringify(infooo));
+
+console.log("Información agregada exitosamente.");
+console.log(data);
