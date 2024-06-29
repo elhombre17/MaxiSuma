@@ -10,36 +10,33 @@
 <body>
     <div class="container-fluid">
         <div class="row nav">
-                <h2 class="col-8 text-white">Maxi Suma</h2>
-                <button class="btn btn-success col-4 my-1" id="cerrar">Cerrar Caja</button>
+            <span class="col-8">
+                <h2 class="text-white">Maxi Suma</h2>
+            </span>            
+            <span class="dropdown col-2 justify">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Menu </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Ver cierre</a></li>
+                    <li><a class="dropdown-item" href="#">Cerrar caja</a></li>
+                    <li><a class="dropdown-item" href="#">Informacion</a></li>
+                </ul>
+            </span>
         </div>
         <div class="input-group my-3">
             <span class="input-group-text bg-dark text-white">$</span>
-            <input type="number" class="form-control" required>
+            <input type="number" id="input" class="form-control">
             <span class="input-group-text bg-dark text-white">.00</span>
           </div>
-        <div class="row">
-            <button class="btn btn-primary" id="ypf">YPF</button>
-        </div>
-        <br>
-        <div class="row">
-            <button class="btn btn-info" id="mp">MP</button>
-        </div>
-        <br>
-        <div class="row">
-            <button class="btn btn-warning col" id="remito">REMITO</button>
-        </div>
-        <br>
-        <div class="row">
-            <button class="btn btn-danger col" id="ruta">RUTA</button>
-        </div>
-        <br>
-        <div class="row">
-            <button class="btn btn-success col" id="vale">VALE</button>
+        <div class="row" id="opciones">
+            <button class="btn btn-primary col-12 mb-2" id="ypf">YPF</button>
+            <button class="btn btn-info col-12 mb-2" id="mp">MP</button>
+            <button class="btn btn-warning col-12 mb-2" id="remito">REMITO</button>
+            <button class="btn btn-danger col-12 mb-2" id="ruta">RUTA</button>
+            <button class="btn btn-success col-12" id="vale">VALE</button>
         </div>
     </div>
-    
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
 </body>
 </html>
