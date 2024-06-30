@@ -1,39 +1,39 @@
+//Inicio de variables y constantes
 const $opciones = document.getElementById('opciones'),
-      $importe = document.getElementById('input');
+      $importe = document.getElementById('input'),
+      $alertPlaceholder = document.getElementById('liveAlertPlaceholder'),
+      fecha = new Date();
+let importe; 
 
-let importe;
+//Captar el input del monto y ponerlo en una variable
 $importe.addEventListener('input', function(e){
     importe = e.target.value
 })
+ 
+//Guardar en el localStorage cada uno de los montos especificados
 $opciones.addEventListener('click', function(e){
     if(importe != null){
-        switch (e.target.id) {
-            case "ypf":
-            
-            console.log(`Importe: ${importe} en aplicacion ${e.target.id}`);
-                break;
-            case "mp":
-                console.log("hiciste click en mp");
-                break;
-            case "remito":
-                console.log("hiciste click en remito");
-                break;
-            case "ruta":
-                console.log("hiciste click en ruta");
-                break;
-            case "vale":
-                console.log("hiciste click en vale");
-                break;
-            default:
-                break;
+        let getItems = JSON.parse(localStorage.getItem(`${e.target.id}`));
+        if(getItems == null){
+            getItems = [];
         }
+        let nuevoItem = {
+            "fecha": fecha.toLocaleString(),
+            "importe": Number(importe),
+            "check": false,
+        }
+        getItems.push(nuevoItem);
+        localStorage.setItem(`${e.target.id}`, JSON.stringify(getItems));
+        const verItems = JSON.parse(localStorage.getItem(`${e.target.id}`));
+        console.log(verItems);
         importe = null;
         $importe.value = "";
     }else{
-        appendAlert('Nice, you triggered this alert message!', 'success')
+        appendAlert('Por favor, antes de seleccionar una opcion, ingrese el monto', 'danger')
     }
 })
-const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+
+//Funcion de alert por querer insertar un metodo de pago sin especificar el monto
 const appendAlert = (message, type) => {
   const wrapper = document.createElement('div')
   wrapper.innerHTML = [
@@ -43,28 +43,7 @@ const appendAlert = (message, type) => {
     '</div>'
   ].join('')
 
-  alertPlaceholder.append(wrapper)
+  $alertPlaceholder.append(wrapper)
 }
 
-let info={
-    "id": 0,
-    "nombre": "karin"
-}
-
-localStorage.setItem('data', JSON.stringify(info));
-
-// Leer el JSON existente del localStorage
-let data = localStorage.getItem('data');
-
-console.log(data);
-// Nueva información a agregar
-const nuevaInformacion = { "id": 1, "nombre": "Ejemplo" };
-
-// Agregar nueva información a la lista
-let infooo = {...data, ...nuevaInformacion}
-
-// Guardar el JSON actualizado en el localStorage
-localStorage.setItem('data', JSON.stringify(infooo));
-
-console.log("Información agregada exitosamente.");
-console.log(data);
+//Cargar informacion a la tabla de cierre de caja
