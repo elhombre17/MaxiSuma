@@ -1,4 +1,4 @@
-//Inicio de variables y constantes
+lo//Inicio de variables y constantes
 const fecha = new Date();
 let importe; 
 //Pagina de index.html
@@ -193,7 +193,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
         })
     }
     //Boton borrar
-    
+$borrarCaja = document.getElementById('borrarCaja');
+$borrarCaja.document.addEventListener('click', ()=>{ 
+localStorage.clear();
+}
 })
 
 
