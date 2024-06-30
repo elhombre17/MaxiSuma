@@ -1,7 +1,7 @@
 //Inicio de variables y constantes
 const fecha = new Date();
 let importe; 
-
+//Pagina de index.html
 document.addEventListener('DOMContentLoaded', ()=>{
     const $opciones = document.getElementById('opciones'),
       $importe = document.getElementById('input'),
@@ -53,8 +53,10 @@ if($opciones){
     }
 })
 
+//Pagina de cierre.html
 document.addEventListener('DOMContentLoaded', ()=>{
-//Cargar informacion al acordeon de cierre de caja
+//Cargar informacion a la cabecera del acordeon
+    //Suma YPF
     $ypf = document.getElementById('totalypf')
     if($ypf){
         const getYPF = JSON.parse(localStorage.getItem("ypf"));
@@ -66,6 +68,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
         $ypf.textContent = ` ${ypfTotal}`;  
         }
     }
+
+    //Suma MP
     $mp = document.getElementById('totalmp')
     if($mp){
         const getMP = JSON.parse(localStorage.getItem("mp"));
@@ -77,6 +81,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
             $mp.textContent = ` ${mpTotal}`; 
         }
     }
+
+    //Suma Remitos
     $remitos = document.getElementById('totalremitos')
     if($remitos){
         const getRemitos = JSON.parse(localStorage.getItem("remito"));
@@ -88,6 +94,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
             $remitos.textContent = ` ${remitosTotal}`; 
         }
     }
+
+    //Suma Ruta
     $ruta = document.getElementById('totalruta')
     if($ruta){
         const getRuta = JSON.parse(localStorage.getItem("ruta"));
@@ -99,11 +107,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
             $ruta.textContent = ` ${rutaTotal}`; 
         }
     }
+
+    //Suma Vale
     $vale = document.getElementById('totalvale')
     if($vale){
         const getVale = JSON.parse(localStorage.getItem("vale"));
         if(getVale!=null){
-            console.log(getVale);
             let valeTotal = 0; 
             getVale.forEach(element => {
                 valeTotal = valeTotal + element.importe
@@ -111,4 +120,80 @@ document.addEventListener('DOMContentLoaded', ()=>{
             $vale.textContent = ` ${valeTotal}`; 
         }
     }
+
+//Cargar informacion al body del acordion
+    const $acordion = document.getElementById('accordionTotales');
+    if($acordion){
+        const fragment = document.createDocumentFragment();
+        $acordion.addEventListener('click', (e)=>{
+            switch (e.target.id) {
+                //ingresar informacion al body de YPF
+                case "btnacypf":
+                    const getYPF = JSON.parse(localStorage.getItem("ypf"));
+                    if(getYPF!=null){
+                        getYPF.forEach(element => {
+                            const newElement = document.createElement('li');
+                            newElement.textContent = "  $" + `${element.importe}` + "  -    " + `${element.fecha}`;
+                            fragment.appendChild(newElement);
+                        });
+                        document.getElementById('ypfbody').appendChild(fragment);
+                    }
+                    break;
+                //ingresar informacion al body de MP   
+                case "btnacmp":
+                    const getMP = JSON.parse(localStorage.getItem("mp"));
+                    if(getMP!=null){
+                        getMP.forEach(element => {
+                            const newElement = document.createElement('li');
+                            newElement.textContent = "  $" + `${element.importe}` + "  -    " + `${element.fecha}`;
+                            fragment.appendChild(newElement);
+                        });
+                        document.getElementById('mpbody').appendChild(fragment);
+                    }
+                    break;
+                //ingresar informacion al body de REMITOS  
+                case "btnacremitos":
+                    const getRemitos = JSON.parse(localStorage.getItem("remito"));
+                    if(getRemitos!=null){
+                        getRemitos.forEach(element => {
+                            const newElement = document.createElement('li');
+                            newElement.textContent = "  $" + `${element.importe}` + "  -    " + `${element.fecha}`;
+                            fragment.appendChild(newElement);
+                        });
+                        document.getElementById('remitosbody').appendChild(fragment);
+                    }
+                    break;
+                //ingresar informacion al body de YPF EN RUTA
+                case "btnacruta":
+                    const getRuta = JSON.parse(localStorage.getItem("ruta"));
+                    if(getRuta!=null){
+                        getRuta.forEach(element => {
+                            const newElement = document.createElement('li');
+                            newElement.textContent = "  $" + `${element.importe}` + "  -    " + `${element.fecha}`;
+                            fragment.appendChild(newElement);
+                        });
+                        document.getElementById('rutabody').appendChild(fragment);
+                    }
+                    break;
+                //ingresar informacion al body de VALES
+                case "btnacvales":
+                    const getVale = JSON.parse(localStorage.getItem("vale"));
+                    if(getVale!=null){
+                        getVale.forEach(element => {
+                            const newElement = document.createElement('li');
+                            newElement.textContent = "  $" + `${element.importe}` + "  -    " + `${element.fecha}`;
+                            fragment.appendChild(newElement);
+                        });
+                        document.getElementById('valesbody').appendChild(fragment);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        })
+    }
+    //Boton borrar
+    
 })
+
+
