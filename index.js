@@ -1,4 +1,4 @@
-lo//Inicio de variables y constantes
+//Inicio de variables y constantes
 const fecha = new Date();
 let importe; 
 //Pagina de index.html
