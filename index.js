@@ -193,6 +193,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
         })
     }
     //Boton borrar
+    const $borrarcaja = document.getElementById('borrarcaja');
+    $borrarcaja.addEventListener('click', ()=>{
+        if(confirm("¿Seguro que desea borrar los datos de la caja?")){
+            if(confirm("¿Seguro?")){
+                localStorage.clear();
+                alert("Felicidades! Inicio una nueva caja.");
+                location.reload();
+            }
+        }
+        
+    })
+
 })
 
 
