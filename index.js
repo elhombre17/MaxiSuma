@@ -193,10 +193,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
         })
     }
     //Boton borrar
-$borrarCaja = document.getElementById('borrarCaja');
-$borrarCaja.document.addEventListener('click', ()=>{ 
-localStorage.clear();
-}
 })
 
 
