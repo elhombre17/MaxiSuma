@@ -1,5 +1,4 @@
-//Inicio de variables y constantes
-const fecha = new Date();
+//Inicio de variable importe
 let importe; 
 //Pagina de index.html
 document.addEventListener('DOMContentLoaded', ()=>{
@@ -23,6 +22,7 @@ if($opciones){
             if(getItems == null){
                 getItems = [];
             }
+            const fecha = new Date();
             let nuevoItem = {
                 "fecha": fecha.toLocaleString(),
                 "importe": Number(importe),
@@ -54,6 +54,8 @@ if($opciones){
 })
 
 //Pagina de cierre.html
+let sumatotal = 0; 
+let sumaposnet = 0;
 document.addEventListener('DOMContentLoaded', ()=>{
 //Cargar informacion a la cabecera del acordeon
     //Suma YPF
@@ -65,6 +67,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         getYPF.forEach(element => {
             ypfTotal = ypfTotal + element.importe
         });
+        sumatotal = sumatotal + ypfTotal;
         $ypf.textContent = ` ${ypfTotal}`;  
         }
     }
@@ -78,6 +81,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             getMP.forEach(element => {
                 mpTotal = mpTotal + element.importe
             });
+            sumatotal = sumatotal + mpTotal;
             $mp.textContent = ` ${mpTotal}`; 
         }
     }
@@ -91,6 +95,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             getRemitos.forEach(element => {
                 remitosTotal = remitosTotal + element.importe
             });
+            sumatotal = sumatotal + remitosTotal;
             $remitos.textContent = ` ${remitosTotal}`; 
         }
     }
@@ -104,6 +109,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
             getRuta.forEach(element => {
                 rutaTotal = rutaTotal + element.importe
             });
+            sumatotal = sumatotal + rutaTotal;
             $ruta.textContent = ` ${rutaTotal}`; 
         }
     }
@@ -117,9 +123,39 @@ document.addEventListener('DOMContentLoaded', ()=>{
             getVale.forEach(element => {
                 valeTotal = valeTotal + element.importe
             });
+            sumatotal = sumatotal + valeTotal;
             $vale.textContent = ` ${valeTotal}`; 
         }
     }
+
+     //Suma posnet card
+     $card = document.getElementById('totalcard')
+     if($card){
+         const getCard = JSON.parse(localStorage.getItem("card"));
+         if(getCard!=null){
+             let cardTotal = 0; 
+             getCard.forEach(element => {
+                 cardTotal = element.importe
+             });
+             sumaposnet = sumaposnet + cardTotal;
+             sumatotal = sumatotal + cardTotal;
+             $card.textContent = ` ${cardTotal}`; 
+         }
+     }
+     //Suma posnet qr
+     $qr = document.getElementById('totalqr')
+     if($qr){
+         const getQr = JSON.parse(localStorage.getItem("qr"));
+         if(getQr!=null){
+             let qrTotal = 0; 
+             getQr.forEach(element => {
+                 qrTotal = element.importe
+             });
+             sumaposnet = sumaposnet + qrTotal;
+             sumatotal = sumatotal + qrTotal;
+             $qr.textContent = ` ${qrTotal}`; 
+         }
+     }
 
 //Cargar informacion al body del acordion
     const $acordion = document.getElementById('accordionTotales');
@@ -187,11 +223,43 @@ document.addEventListener('DOMContentLoaded', ()=>{
                         document.getElementById('valesbody').appendChild(fragment);
                     }
                     break;
+                //ingresar informacion al body de POSNET TARJETA
+                case "btnaccard":
+                    const getCard = JSON.parse(localStorage.getItem("card"));
+                    if(getCard!=null){
+                        getCard.forEach(element => {
+                            const newElement = document.createElement('li');
+                            newElement.textContent = "  $" + `${element.importe}` + "  -    " + `${element.fecha}`;
+                            fragment.appendChild(newElement);
+                        });
+                        document.getElementById('cardbody').appendChild(fragment);
+                    }
+                    break;
+                //ingresar informacion al body de POSNET TARJETA
+                case "btnacqr":
+                    const getQr = JSON.parse(localStorage.getItem("qr"));
+                    if(getQr!=null){
+                        getQr.forEach(element => {
+                            const newElement = document.createElement('li');
+                            newElement.textContent = "  $" + `${element.importe}` + "  -    " + `${element.fecha}`;
+                            fragment.appendChild(newElement);
+                        });
+                        document.getElementById('qrbody').appendChild(fragment);
+                    }
+                    break;
                 default:
                     break;
             }
         })
     }
+    //Alert suma tarjeta
+    const $alertSumaPosnet= document.getElementById('sumaposnet');
+    $alertSumaPosnet.textContent = "Total Posnet: "+ `${sumaposnet}`;
+
+    //Alert suma total
+    const $alertSumaTotal = document.getElementById('sumatotal');
+    $alertSumaTotal.textContent = "TOTAL: "+ `${sumatotal}`; 
+
     //Boton borrar
     const $borrarcaja = document.getElementById('borrarcaja');
     $borrarcaja.addEventListener('click', ()=>{
@@ -201,10 +269,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 alert("Felicidades! Inicio una nueva caja.");
                 location.reload();
             }
-        }
-        
+        }  
     })
-
 })
-
 

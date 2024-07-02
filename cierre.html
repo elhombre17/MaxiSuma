@@ -65,10 +65,40 @@
               <div class="accordion-body" id="valesbody"></div>
             </div>
           </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" id="btnaccard" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseFive">
+                POSNET TARJETA: $<strong id="totalcard"></strong>
+              </button>
+            </h2>
+            <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body" id="cardbody"></div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" id="btnacqr" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseFive">
+                POSNET QR: $<strong id="totalqr"></strong>
+              </button>
+            </h2>
+            <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body" id="qrbody"></div>
+            </div>
+          </div>
         </div>
         <div class="row">
           <div class="col-12">
-            <a class="btn btn-secondary col-12 mt-2" href="index.html">Volver</a>
+            <div class="alert alert-primary mt-2 mb-1" id="sumaposnet" role="alert"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="alert alert-success" role="alert"> <strong id="sumatotal"></strong></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <a class="btn btn-secondary col-12" href="index.html">Volver</a>
           </div>
         </div>
         <div class="row">
