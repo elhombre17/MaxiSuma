@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const $opciones = document.getElementById('opciones'),
       $importe = document.getElementById('input'),
       $alertPlaceholder = document.getElementById('liveAlertPlaceholder'),
+      $confirmPlaceholder = document.getElementById('confirmacion'),
       $cierre = document.getElementById('cierre');
 
 //Captar el input del monto y ponerlo en una variable
@@ -32,8 +33,10 @@ if($opciones){
             localStorage.setItem(`${e.target.id}`, JSON.stringify(getItems));
             const verItems = JSON.parse(localStorage.getItem(`${e.target.id}`));
             console.log(verItems);
+            appendConfirm(`Se cargo el monto: ${importe} mediante ${e.target.id}`, 'success' );
             importe = null;
             $importe.value = "";
+            
         }else{
             appendAlert('Por favor, antes de seleccionar una opcion, ingrese el monto', 'danger')
         }
@@ -51,7 +54,23 @@ if($opciones){
     
         $alertPlaceholder.append(wrapper)
     }
+
+
+//Funcion de alert de confirmacion de ingreso exitoso del item
+    const appendConfirm= (message, type) => {
+        const wrapper = document.createElement('div')
+        wrapper.innerHTML = [
+        `<div class="alert alert-${type} alert-dismissible mt-3" role="alert">`,
+        `   <div>${message}</div>`,
+        '   <button type="button" id="cerrarconfirm" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+        ].join('')
+
+        $confirmPlaceholder.append(wrapper) 
+        }
 })
+
+
 
 //Pagina de cierre.html
 let sumatotal = 0; 
@@ -135,7 +154,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
          if(getCard!=null){
              let cardTotal = 0; 
              getCard.forEach(element => {
-                 cardTotal = element.importe
+                 cardTotal = cardTotal + element.importe
              });
              sumaposnet = sumaposnet + cardTotal;
              sumatotal = sumatotal + cardTotal;
@@ -149,7 +168,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
          if(getQr!=null){
              let qrTotal = 0; 
              getQr.forEach(element => {
-                 qrTotal = element.importe
+                 qrTotal = qrTotal + element.importe
              });
              sumaposnet = sumaposnet + qrTotal;
              sumatotal = sumatotal + qrTotal;
